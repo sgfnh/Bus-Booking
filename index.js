@@ -6,17 +6,17 @@ function handle(event){
         "pho":event.target.pho.value,
         "car":event.target.car.value
     }
-    axios.post("https://crudcrud.com/api/0ce967584a5944a7a9988cab29669d53/busd",user)
+    axios.post("https://crudcrud.com/api/e46fbc3ae36b40a780629fa9266da030/busd",user)
     .then((res)=>{
         showScr(res.data)
     })
     .catch((err)=>{
         console.log(err)
     })
-    showScr(user)
+   
 }
 window.addEventListener('DOMContentLoaded',()=>{
-    axios.get("https://crudcrud.com/api/0ce967584a5944a7a9988cab29669d53/busd")
+    axios.get("https://crudcrud.com/api/e46fbc3ae36b40a780629fa9266da030/busd")
     .then((res)=>{
         console.log(res)
         for(var i=0;i<res.data.length;i++){
@@ -29,18 +29,25 @@ window.addEventListener('DOMContentLoaded',()=>{
 })
 function showScr(user){
     const lo=document.getElementById('lo')
-    const ui=document.createElement('li')
-    ui.textContent=user.nam+user.email+user.pho+user.car
+    const ui=document.createElement('p')
+    ui.setAttribute("id",user.car)
+    ui.textContent=user.nam+"  "+user.email+"  "+user.pho+"  "+user.car
     lo.appendChild(ui)
     const dbtn=document.createElement('button')
-    dbtn.textContent="Delete"
+    dbtn.textContent="DELETE"
     ui.appendChild(dbtn)
     dbtn.addEventListener("click",()=>{
-        localStorage.removeItem(user.nam)
+        axios.delete(`https://crudcrud.com/api/e46fbc3ae36b40a780629fa9266da030/busd/${user._id}`)
+        .then((res)=>{
+            console.log(res)
+        })
+        .catch((err)=>{
+            console.log(err)
+        })
         lo.removeChild(ui)
     })
     const ebtn=document.createElement('button')
-    ebtn.textContent="Edit"
+    ebtn.textContent="EDIT"
     ui.appendChild(ebtn)
     ebtn.addEventListener("click",()=>{
         lo.removeChild(ui)
@@ -48,5 +55,38 @@ function showScr(user){
         document.getElementById('mail').value=user.email
         document.getElementById('pho').value=user.pho
         document.getElementById('car').value=user.car
+        axios.delete(`https://crudcrud.com/api/e46fbc3ae36b40a780629fa9266da030/busd/${user._id}`)
+        .then((res)=>{
+            console.log(res)
+        })
+        .catch((err)=>{
+            console.log(err)
+        })
+        lo.removeChild(ui)
+        axios.post("https://crudcrud.com/api/e46fbc3ae36b40a780629fa9266da030/busd",user)
+       .then((res)=>{
+        console.log(res.data)
+        })
+       .catch((err)=>{
+        console.log(err)
+        })
+
+    })
+    const drop=document.getElementById('fil')
+    drop.addEventListener("change",()=>{
+        var sel=drop.value
+        var tab=document.getElementById('lo')
+        for(var i=0;i<tab.children.length;i++){
+            if(sel==='All'){
+               tab.children[i].style.display='';
+            }else{
+                if(tab.children[i].id!==sel){
+                    tab.children[i].style.display='none'
+                }else{
+                    tab.children[i].style.display=''
+                }
+            }
+        }
+
     })
 }
