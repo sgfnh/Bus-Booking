@@ -7,48 +7,46 @@
 </head>
 <body>
     <form onsubmit="handle(event)">
-        <h3 align="center">Bus Booking</h3>
+        <h1 align="center">Bus Booking</h1>
         <center>
             <label for="fil">Filter:</label>
             <select id="fil" name="fil">
-                <option>All</option>
-                <option>Bus1</option>
-                <option>Bus2</option>
-                <option>Bus3</option>
+                <option value="All">All</option>
+                <option value="Bus 1">Bus 1</option>
+                <option value="Bus 2">Bus 2</option>
+                <option value="Bus 3">Bus 3</option>
             </select> 
         </center>
         
         <br>
         <br>
-        <br>
-        <label for="nam">Name</label>
+        <label for="nam">Name:</label>
         <input type="text" name="nam" id="nam">
         <br>
         <br>
-        
-        <label for="mail">Email</label>
+        <label for="mail">Email:</label>
         <input type="email" name="mail" id="mail">
         <br>
         <br>
         
-        <label for="pho">Phone</label>
+        <label for="pho">Phone:</label>
         <input type="tel" name="pho" id="pho">
         <br>
         <br>
         
-        <label for="car">Car Name</label>
+        <label for="car">Car Number:</label>
         <select name="car" id="car">
-            <option>Bus1</option>
-            <option>Bus2</option>
-            <option>Bus3</option>
+            <option>Bus 1</option>
+            <option>Bus 2</option>
+            <option>Bus 3</option>
         </select>
         <br>
         <br>
         
         <button type="submit">Book</button>
     </form>
-    <ul id="lo"></ul>
+    <div id="lo"></div>
 </body>
-<script src="index.js"></script>
+<script src="bus.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.8/axios.min.js"></script>
 </html>
